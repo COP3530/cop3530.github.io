@@ -1,0 +1,50 @@
+[
+  {
+    "id": "week01-intro",
+    "title": "Introduction & Algorithm Analysis",
+    "week": 1,
+    "topics": ["Algorithms", "Complexity"],
+    "summary": "Course overview, Big-O basics, introduction to algorithm analysis and complexity theory.",
+    "contentUrl": "https://github.com/COP3530/Instructional-Content/tree/main/Week01",
+    "resources": [
+      {"label": "Slides", "url": "https://github.com/COP3530/Instructional-Content/blob/main/Week01/slides.pdf"},
+      {"label": "Notes", "url": "https://github.com/COP3530/Instructional-Content/blob/main/Week01/notes.md"}
+    ]
+  },
+  {
+    "id": "week02-linear",
+    "title": "Linear Data Structures",
+    "week": 2,
+    "topics": ["Arrays", "Lists", "Stacks", "Queues"],
+    "summary": "Introduction to fundamental linear data structures: arrays, linked lists, stacks, and queues.",
+    "contentUrl": "https://github.com/COP3530/Instructional-Content/tree/main/Week02",
+    "resources": [
+      {"label": "Slides", "url": "https://github.com/COP3530/Instructional-Content/blob/main/Week02/slides.pdf"},
+      {"label": "Code Examples", "url": "https://github.com/COP3530/Instructional-Content/tree/main/Week02/examples"}
+    ]
+  },
+  {
+    "id": "week03-trees",
+    "title": "Trees and Binary Search Trees",
+    "week": 3,
+    "topics": ["Trees", "BST", "Tree Traversal"],
+    "summary": "Understanding tree structures, binary search trees, and various traversal algorithms.",
+    "contentUrl": "https://github.com/COP3530/Instructional-Content/tree/main/Week03",
+    "resources": [
+      {"label": "Slides", "url": "https://github.com/COP3530/Instructional-Content/blob/main/Week03/slides.pdf"},
+      {"label": "Visualization Tool", "url": "https://visualgo.net/en/bst"}
+    ]
+  },
+  {
+    "id": "week04-hashing",
+    "title": "Hash Tables and Hash Functions",
+    "week": 4,
+    "topics": ["Hashing", "Hash Tables", "Collision Resolution"],
+    "summary": "Hash functions, hash tables implementation, and collision resolution techniques.",
+    "contentUrl": "https://github.com/COP3530/Instructional-Content/tree/main/Week04",
+    "resources": [
+      {"label": "Slides", "url": "https://github.com/COP3530/Instructional-Content/blob/main/Week04/slides.pdf"},
+      {"label": "Hash Function Demo", "url": "https://github.com/COP3530/Instructional-Content/blob/main/Week04/hash_demo.cpp"}
+    ]
+  }
+]

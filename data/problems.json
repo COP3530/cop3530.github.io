@@ -1,0 +1,74 @@
+[
+  {
+    "id": "pp-001",
+    "title": "Two Sum Variant",
+    "topic": "Arrays",
+    "difficulty": "Easy",
+    "tags": ["array", "hash-map", "two-pointers"],
+    "repoPath": "https://github.com/COP3530/Programming-Problems/tree/main/arrays/two-sum-variant",
+    "description": "Find two indices whose values sum to target with O(n) time complexity using hashing techniques."
+  },
+  {
+    "id": "pp-002", 
+    "title": "Balanced Parentheses",
+    "topic": "Stacks",
+    "difficulty": "Easy",
+    "tags": ["stack", "string", "parsing"],
+    "repoPath": "https://github.com/COP3530/Programming-Problems/tree/main/stacks/balanced-parentheses",
+    "description": "Determine if a string of parentheses is balanced using stack data structure."
+  },
+  {
+    "id": "pp-003",
+    "title": "Binary Tree Traversal",
+    "topic": "Trees",
+    "difficulty": "Medium", 
+    "tags": ["tree", "traversal", "recursion", "dfs"],
+    "repoPath": "https://github.com/COP3530/Programming-Problems/tree/main/trees/binary-tree-traversal",
+    "description": "Implement inorder, preorder, and postorder traversal of binary trees both recursively and iteratively."
+  },
+  {
+    "id": "pp-004",
+    "title": "Hash Table Implementation",
+    "topic": "Hashing",
+    "difficulty": "Medium",
+    "tags": ["hash-table", "collision-resolution", "implementation"],
+    "repoPath": "https://github.com/COP3530/Programming-Problems/tree/main/hashing/hash-table-impl",
+    "description": "Build a hash table from scratch with chaining collision resolution and dynamic resizing."
+  },
+  {
+    "id": "pp-005",
+    "title": "Graph Shortest Path",
+    "topic": "Graphs",
+    "difficulty": "Hard",
+    "tags": ["graph", "dijkstra", "shortest-path", "priority-queue"],
+    "repoPath": "https://github.com/COP3530/Programming-Problems/tree/main/graphs/shortest-path",
+    "description": "Implement Dijkstra's algorithm to find shortest paths in weighted graphs."
+  },
+  {
+    "id": "pp-006",
+    "title": "Merge Sort Implementation",
+    "topic": "Sorting",
+    "difficulty": "Medium",
+    "tags": ["sorting", "divide-conquer", "merge-sort"],
+    "repoPath": "https://github.com/COP3530/Programming-Problems/tree/main/sorting/merge-sort",
+    "description": "Implement merge sort algorithm with O(n log n) time complexity and analyze space usage."
+  },
+  {
+    "id": "pp-007",
+    "title": "AVL Tree Operations",
+    "topic": "Trees",
+    "difficulty": "Hard",
+    "tags": ["avl-tree", "self-balancing", "rotations"],
+    "repoPath": "https://github.com/COP3530/Programming-Problems/tree/main/trees/avl-tree",
+    "description": "Implement a self-balancing AVL tree with insertion, deletion, and rotation operations."
+  },
+  {
+    "id": "pp-008",
+    "title": "Dynamic Programming - Knapsack",
+    "topic": "Dynamic Programming", 
+    "difficulty": "Hard",
+    "tags": ["dynamic-programming", "optimization", "knapsack"],
+    "repoPath": "https://github.com/COP3530/Programming-Problems/tree/main/dp/knapsack",
+    "description": "Solve the 0/1 knapsack problem using dynamic programming with space optimization."
+  }
+]
