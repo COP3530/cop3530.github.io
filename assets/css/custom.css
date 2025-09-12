@@ -1,0 +1,118 @@
+/* Custom CSS for COP3530 Course Website */
+
+/* Smooth transitions for theme switching */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500 dark:bg-gray-500;
+}
+
+/* Skip to content link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Custom focus styles for better accessibility */
+.focus-visible:focus-visible {
+  @apply outline-2 outline-offset-2 outline-blue-500;
+}
+
+/* Print styles */
+@media print {
+  .sidebar, .mobile-menu-button, .theme-toggle {
+    display: none !important;
+  }
+  
+  .main-content {
+    margin-left: 0 !important;
+  }
+  
+  .print-break {
+    page-break-after: always;
+  }
+}
+
+/* Animation for mobile sidebar */
+.sidebar-transition {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Custom card hover effects */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  @apply shadow-lg;
+}
+
+/* Tag pill styling */
+.tag-pill {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tag-pill:hover {
+  transform: scale(1.05);
+}
+
+.tag-pill.active {
+  @apply ring-2 ring-offset-2 ring-blue-500;
+}
+
+/* Difficulty badges */
+.difficulty-easy {
+  @apply bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200;
+}
+
+.difficulty-medium {
+  @apply bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200;
+}
+
+.difficulty-hard {
+  @apply bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200;
+}
+
+/* Search input styling */
+.search-input {
+  @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white;
+}
+
+/* Loading state */
+.loading {
+  @apply animate-pulse;
+}
+
+/* Error state */
+.error-message {
+  @apply text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4;
+}

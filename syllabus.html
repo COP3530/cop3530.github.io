@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus - COP3530</title>
+    <meta name="description" content="COP3530 course syllabus with policies, grading, and course information.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    
+    <!-- Configure Tailwind -->
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              'sans': ['Inter', 'system-ui', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 font-sans">
+    <!-- Skip to content link -->
+    <a href="#main-content" class="skip-link focus-visible">Skip to content</a>
+    
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transform -translate-x-full lg:translate-x-0 transition-transform sidebar-transition">
+        <div class="flex flex-col h-full">
+            <!-- Logo/Title -->
+            <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
+                        <span class="text-white font-bold text-sm">CS</span>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-semibold text-gray-900 dark:text-white">COP3530</h1>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Spring 2025</p>
+                    </div>
+                </div>
+                <button id="sidebar-close" class="lg:hidden p-1 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 p-4 space-y-2">
+                <a href="/" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                    </svg>
+                    Dashboard
+                </a>
+                
+                <a href="/modules.html" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
+                    </svg>
+                    Modules
+                </a>
+                
+                <a href="/problems.html" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    Problems
+                </a>
+                
+                <a href="/schedule.html" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                    </svg>
+                    Schedule
+                </a>
+                
+                <a href="/resources.html" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    Resources
+                </a>
+                
+                <a href="/syllabus.html" class="flex items-center px-3 py-2 text-sm font-medium rounded-md bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200">
+                    <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
+                    </svg>
+                    Syllabus
+                </a>
+                
+                <a href="/announcements.html" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clip-rule="evenodd"></path>
+                    </svg>
+                    Announcements
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Mobile menu overlay -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden hidden"></div>
+
+    <!-- Main content -->
+    <div class="lg:ml-64 flex flex-col min-h-screen">
+        <!-- Top bar -->
+        <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center">
+                <button id="sidebar-toggle" class="lg:hidden p-2 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 mr-3">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+                
+                <!-- Breadcrumb -->
+                <nav class="flex" aria-label="Breadcrumb">
+                    <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                        <li class="inline-flex items-center">
+                            <a href="/" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Dashboard</a>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-gray-400 mx-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700 dark:text-gray-200 font-medium">Syllabus</span>
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+
+            <!-- Theme toggle -->
+            <button id="theme-toggle" class="p-2 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700">
+                <svg class="sun-icon w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                </svg>
+                <svg class="moon-icon w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Main content area -->
+        <main id="main-content" class="flex-1 p-6 max-w-4xl mx-auto w-full">
+            <!-- Course Header -->
+            <div class="mb-8 text-center">
+                <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">COP3530 - Data Structures and Algorithms</h1>
+                <div class="text-lg text-gray-600 dark:text-gray-400 space-y-1">
+                    <p><strong>Spring 2025</strong> • University of Florida</p>
+                    <p><strong>Credits:</strong> 3 • <strong>Prerequisites:</strong> COP3503 (Programming 2) with grade of C or better</p>
+                </div>
+            </div>
+
+            <!-- Course Information -->
+            <section class="mb-8">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Course Information</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-3">Instructor</h3>
+                            <div class="text-gray-600 dark:text-gray-300 space-y-1">
+                                <p><strong>Professor John Smith</strong></p>
+                                <p>Email: jsmith@ufl.edu</p>
+                                <p>Office: CSE 301</p>
+                                <p>Phone: (352) 555-0123</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-3">Class Schedule</h3>
+                            <div class="text-gray-600 dark:text-gray-300 space-y-1">
+                                <p><strong>Lectures:</strong> MWF 10:40-11:30 AM</p>
+                                <p><strong>Location:</strong> Little Hall 101</p>
+                                <p><strong>Lab:</strong> Thursday 2:00-4:00 PM</p>
+                                <p><strong>Lab Location:</strong> CSE 120</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Course Description -->
+            <section class="mb-8">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Course Description</h2>
+                    <div class="prose prose-gray dark:prose-invert max-w-none">
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                            This course provides a comprehensive introduction to data structures and algorithms essential for computer science. 
+                            Students will learn to analyze, design, and implement fundamental data structures including arrays, linked lists, 
+                            stacks, queues, trees, heaps, hash tables, and graphs. The course emphasizes algorithm analysis, complexity theory, 
+                            and the selection of appropriate data structures for solving computational problems.
+                        </p>
+                        
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mt-6 mb-3">Learning Objectives</h3>
+                        <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                            <li>Understand and analyze time and space complexity using Big-O notation</li>
+                            <li>Implement fundamental data structures in C++</li>
+                            <li>Design and analyze recursive and iterative algorithms</li>
+                            <li>Apply appropriate data structures to solve real-world problems</li>
+                            <li>Understand graph algorithms including traversal and shortest path</li>
+                            <li>Implement and analyze various sorting algorithms</li>
+                            <li>Develop problem-solving skills for algorithmic challenges</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Grading -->
+            <section class="mb-8">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Grading Policy</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Grade Distribution</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                                    <span class="font-medium text-gray-900 dark:text-white">Programming Assignments</span>
+                                    <span class="text-blue-600 dark:text-blue-400 font-semibold">40%</span>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                                    <span class="font-medium text-gray-900 dark:text-white">Midterm Exam</span>
+                                    <span class="text-green-600 dark:text-green-400 font-semibold">20%</span>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                                    <span class="font-medium text-gray-900 dark:text-white">Final Exam</span>
+                                    <span class="text-purple-600 dark:text-purple-400 font-semibold">25%</span>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                                    <span class="font-medium text-gray-900 dark:text-white">Quizzes</span>
+                                    <span class="text-amber-600 dark:text-amber-400 font-semibold">10%</span>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                                    <span class="font-medium text-gray-900 dark:text-white">Participation</span>
+                                    <span class="text-red-600 dark:text-red-400 font-semibold">5%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Letter Grade Scale</h3>
+                            <div class="space-y-2">
+                                <div class="flex justify-between p-2 border-b border-gray-200 dark:border-gray-600">
+                                    <span class="font-medium text-gray-900 dark:text-white">A</span>
+                                    <span class="text-gray-600 dark:text-gray-400">93-100%</span>
+                                </div>
+                                <div class="flex justify-between p-2 border-b border-gray-200 dark:border-gray-600">
+                                    <span class="font-medium text-gray-900 dark:text-white">A-</span>
+                                    <span class="text-gray-600 dark:text-gray-400">90-92%</span>
+                                </div>
+                                <div class="flex justify-between p-2 border-b border-gray-200 dark:border-gray-600">
+                                    <span class="font-medium text-gray-900 dark:text-white">B+</span>
+                                    <span class="text-gray-600 dark:text-gray-400">87-89%</span>
+                                </div>
+                                <div class="flex justify-between p-2 border-b border-gray-200 dark:border-gray-600">
+                                    <span class="font-medium text-gray-900 dark:text-white">B</span>
+                                    <span class="text-gray-600 dark:text-gray-400">83-86%</span>
+                                </div>
+                                <div class="flex justify-between p-2 border-b border-gray-200 dark:border-gray-600">
+                                    <span class="font-medium text-gray-900 dark:text-white">B-</span>
+                                    <span class="text-gray-600 dark:text-gray-400">80-82%</span>
+                                </div>
+                                <div class="flex justify-between p-2 border-b border-gray-200 dark:border-gray-600">
+                                    <span class="font-medium text-gray-900 dark:text-white">C+</span>
+                                    <span class="text-gray-600 dark:text-gray-400">77-79%</span>
+                                </div>
+                                <div class="flex justify-between p-2 border-b border-gray-200 dark:border-gray-600">
+                                    <span class="font-medium text-gray-900 dark:text-white">C</span>
+                                    <span class="text-gray-600 dark:text-gray-400">70-76%</span>
+                                </div>
+                                <div class="flex justify-between p-2">
+                                    <span class="font-medium text-gray-900 dark:text-white">F</span>
+                                    <span class="text-gray-600 dark:text-gray-400">&lt; 70%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Course Policies -->
+            <section class="mb-8">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Course Policies</h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-3">Attendance Policy</h3>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                Regular attendance is strongly encouraged but not mandatory. However, students are responsible for all material covered in class, 
+                                including announcements and schedule changes. If you miss class, please check with classmates for notes and announcements.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-3">Late Assignment Policy</h3>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                Programming assignments lose 10% per day late (including weekends). No assignments accepted more than 5 days late without 
+                                prior arrangement. Medical emergencies and university-sanctioned activities may qualify for extensions with appropriate documentation.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-3">Make-up Exam Policy</h3>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                Make-up exams will only be given in case of documented emergencies or university-sanctioned activities. 
+                                Students must contact the instructor as soon as possible to arrange a make-up exam.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-3">Academic Integrity</h3>
+                            <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                                <p class="text-red-800 dark:text-red-200 leading-relaxed">
+                                    <strong>All work submitted must be your own.</strong> Collaboration on understanding concepts is encouraged, 
+                                    but code must be written independently. Plagiarism, copying code, or unauthorized collaboration will result 
+                                    in failure of the assignment and may result in failure of the course. When in doubt, ask the instructor.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Required Materials -->
+            <section class="mb-8">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Required Materials</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-4">
+                            <h3 class="font-medium text-gray-900 dark:text-white mb-2">Textbook (Required)</h3>
+                            <p class="text-gray-700 dark:text-gray-300">
+                                <strong>Data Structures and Algorithm Analysis in C++</strong> (4th Edition)<br>
+                                by Mark Allen Weiss<br>
+                                ISBN: 978-0132847377
+                            </p>
+                        </div>
+                        
+                        <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-4">
+                            <h3 class="font-medium text-gray-900 dark:text-white mb-2">Software Requirements</h3>
+                            <ul class="text-gray-700 dark:text-gray-300 list-disc list-inside space-y-1">
+                                <li>C++ compiler (GCC 9.0+ or equivalent)</li>
+                                <li>Text editor or IDE (VS Code, CLion, or similar)</li>
+                                <li>Git for version control (recommended)</li>
+                                <li>Access to Canvas LMS</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-4">
+                            <h3 class="font-medium text-gray-900 dark:text-white mb-2">Recommended Resources</h3>
+                            <ul class="text-gray-700 dark:text-gray-300 list-disc list-inside space-y-1">
+                                <li>Introduction to Algorithms by CLRS (reference)</li>
+                                <li>VisuAlgo.net for algorithm visualizations</li>
+                                <li>LeetCode for additional practice problems</li>
+                                <li>Stack Overflow for programming help</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- University Policies -->
+            <section class="mb-8">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">University Policies</h2>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Disability Accommodations</h3>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+                                Students with disabilities who experience learning barriers are encouraged to contact the Disability Resource Center 
+                                to discuss options. All discussions remain confidential. Students must register with DRC and provide appropriate 
+                                documentation to receive accommodations.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Counseling and Mental Health</h3>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+                                Students experiencing personal problems or lacking clear career and academic goals are encouraged to contact the 
+                                Student Mental Health unit of the Student Health Care Center (352-392-1575) or the Counseling & Wellness Center (352-392-1575).
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Course Evaluation</h3>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+                                Students are expected to provide feedback on the quality of instruction through online course evaluations. 
+                                Evaluations are typically open during the last 2-3 weeks of the semester and are completely anonymous.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Important Dates -->
+            <section>
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Important Dates</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                                <span class="font-medium text-gray-900 dark:text-white">Classes Begin</span>
+                                <span class="text-blue-600 dark:text-blue-400 font-semibold">January 13</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-red-50 dark:bg-red-900/20 rounded-lg">
+                                <span class="font-medium text-gray-900 dark:text-white">Drop/Add Deadline</span>
+                                <span class="text-red-600 dark:text-red-400 font-semibold">January 20</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+                                <span class="font-medium text-gray-900 dark:text-white">Midterm Exam</span>
+                                <span class="text-purple-600 dark:text-purple-400 font-semibold">February 21</span>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                                <span class="font-medium text-gray-900 dark:text-white">Spring Break</span>
+                                <span class="text-green-600 dark:text-green-400 font-semibold">March 10-14</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
+                                <span class="font-medium text-gray-900 dark:text-white">Withdrawal Deadline</span>
+                                <span class="text-amber-600 dark:text-amber-400 font-semibold">March 28</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                                <span class="font-medium text-gray-900 dark:text-white">Final Exam</span>
+                                <span class="text-gray-600 dark:text-gray-400 font-semibold">TBD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/assets/js/components.js"></script>
+    <script src="/assets/js/theme.js"></script>
+    
+    <!-- Shared mobile menu functionality -->
+    <script>
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebarToggle = document.getElementById('sidebar-toggle');
+            const sidebarClose = document.getElementById('sidebar-close');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+
+            const showSidebar = () => {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            };
+
+            const hideSidebar = () => {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            };
+
+            sidebarToggle?.addEventListener('click', showSidebar);
+            sidebarClose?.addEventListener('click', hideSidebar);
+            overlay?.addEventListener('click', hideSidebar);
+        });
+    </script>
+</body>
+</html>

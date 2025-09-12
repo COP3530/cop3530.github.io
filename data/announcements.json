@@ -1,0 +1,32 @@
+[
+  {
+    "id": "2025-01-10-welcome",
+    "title": "Welcome to COP3530 Spring 2025!",
+    "body": "<p>Welcome to Data Structures and Algorithms! This semester we'll explore fundamental computer science concepts including linear data structures, trees, graphs, sorting algorithms, and more.</p><p><strong>Important first steps:</strong></p><ul><li>Ensure you have a working C++ development environment</li><li>Review the syllabus and course schedule</li><li>Join the course discussion forum</li></ul>",
+    "posted_at": "2025-01-10T12:00:00Z"
+  },
+  {
+    "id": "2025-01-15-setup",
+    "title": "Development Environment Setup",
+    "body": "<p>Please make sure you have your C++ development environment ready by next week. We recommend:</p><ul><li><strong>IDE Options:</strong> VS Code, CLion, or Code::Blocks</li><li><strong>Compiler:</strong> GCC 9.0+ or Clang 10.0+</li><li><strong>Debugger:</strong> GDB or LLDB</li></ul><p>If you need help with setup, attend office hours or post in the discussion forum.</p>",
+    "posted_at": "2025-01-15T10:30:00Z"
+  },
+  {
+    "id": "2025-01-18-first-assignment", 
+    "title": "Programming Assignment 1 Released",
+    "body": "<p>The first programming assignment is now available in the Programming Problems section. This assignment covers basic algorithm analysis and implementation of simple data structures.</p><p><strong>Due Date:</strong> February 1st, 11:59 PM</p><p><strong>Topics:</strong> Array operations, time complexity analysis</p><p>Start early and don't hesitate to ask questions during office hours!</p>",
+    "posted_at": "2025-01-18T14:15:00Z"
+  },
+  {
+    "id": "2025-01-22-office-hours",
+    "title": "Office Hours Update",
+    "body": "<p>Office hours for this week have been updated:</p><ul><li><strong>Tuesday:</strong> 2:00 PM - 4:00 PM (Room CSE 301)</li><li><strong>Thursday:</strong> 10:00 AM - 12:00 PM (Room CSE 301)</li><li><strong>Friday:</strong> 3:00 PM - 5:00 PM (Virtual via Zoom)</li></ul><p>Zoom link is available in Canvas.</p>",
+    "posted_at": "2025-01-22T09:00:00Z"
+  },
+  {
+    "id": "2025-01-25-quiz-reminder",
+    "title": "Quiz 1 This Friday",
+    "body": "<p>Don't forget about Quiz 1 this Friday covering:</p><ul><li>Algorithm analysis and Big-O notation</li><li>Basic data structures (arrays, linked lists)</li><li>Time and space complexity</li></ul><p>The quiz will be held during regular class time and is closed-book. Review the practice problems in Module 1.</p>",
+    "posted_at": "2025-01-25T16:45:00Z"
+  }
+]
