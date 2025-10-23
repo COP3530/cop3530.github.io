@@ -1,3 +1,22 @@
-<html>
-Test2
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <style>
+        body { margin: 0; padding: 0; font-family: sans-serif; }
+        #map { height: 100vh; width: 100%; }
+        #controls { position: absolute; top: 10px; left: 10px; z-index: 1000; background: white; padding: 10px; border: 1px solid #999; }
+        
+        .location-marker-icon { display: flex; justify-content: center; align-items: center; font-weight: bold; color: white; background-color: #A00; border-radius: 50%; border: 2px solid white; width: 28px; height: 28px; font-size: 12px; }
+        .edge-weight-label { background: rgba(255, 255, 255, 0.8); border-radius: 4px; padding: 2px 5px; font-weight: bold; color: #000; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="visualizer.js"></script>
+</body>
 </html>
