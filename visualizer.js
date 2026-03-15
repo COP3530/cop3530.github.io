@@ -17,9 +17,15 @@ const strongColors = [
     '#F032E6'  // Magenta
 ];
 
+// Fixed parameters for edge avoidance
+let nodeBuffer = 0.0003; // Buffer distance around nodes to avoid
+let detourMultiplier = 1.5; // Multiplier for detour distance
+let edgeOpacity = 1; // Edge opacity
+
 function initializeMap() {
     map = L.map('map').setView([29.64833, -82.34944], 15);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 20, // Allow zooming up to level 20 (much closer than default 18)
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 }
@@ -92,6 +98,105 @@ async function loadMasterGraph() {
     }
 }
 
+function findAvoidancePath(fromLoc, toLoc, currentPathKey) {
+    const buffer = nodeBuffer; // Use tunable parameter
+    const stepSize = 0.0001; // Step size for pathfinding
+    
+    // Check if straight line intersects any nodes (except start/end)
+    const straightPath = [[fromLoc.lat, fromLoc.lng], [toLoc.lat, toLoc.lng]];
+    let hasCollision = false;
+    
+    for (const nodeId in locations) {
+        if (nodeId === fromLoc.toString() || nodeId === toLoc.toString()) continue;
+        
+        const nodeLoc = locations[nodeId];
+        if (lineIntersectsNode(straightPath[0], straightPath[1], [nodeLoc.lat, nodeLoc.lng], buffer)) {
+            hasCollision = true;
+            break;
+        }
+    }
+    
+    // If no collision, return straight path
+    if (!hasCollision) {
+        return straightPath;
+    }
+    
+    // Calculate detour path around obstacles
+    const midLat = (fromLoc.lat + toLoc.lat) / 2;
+    const midLng = (fromLoc.lng + toLoc.lng) / 2;
+    
+    // Try multiple detour angles
+    const detourAngles = [Math.PI/4, -Math.PI/4, Math.PI/3, -Math.PI/3];
+    let bestPath = straightPath;
+    let minCollisions = Infinity;
+    
+    for (const angle of detourAngles) {
+        // Calculate detour waypoint
+        const detourLat = midLat + Math.cos(angle) * buffer * detourMultiplier;
+        const detourLng = midLng + Math.sin(angle) * buffer * detourMultiplier;
+        
+        const detourPath = [
+            [fromLoc.lat, fromLoc.lng],
+            [detourLat, detourLng],
+            [toLoc.lat, toLoc.lng]
+        ];
+        
+        // Count collisions for this detour
+        let collisionCount = 0;
+        for (const nodeId in locations) {
+            if (nodeId === fromLoc.toString() || nodeId === toLoc.toString()) continue;
+            
+            const nodeLoc = locations[nodeId];
+            if (lineIntersectsNode([fromLoc.lat, fromLoc.lng], [detourLat, detourLng], [nodeLoc.lat, nodeLoc.lng], buffer) ||
+                lineIntersectsNode([detourLat, detourLng], [toLoc.lat, toLoc.lng], [nodeLoc.lat, nodeLoc.lng], buffer)) {
+                collisionCount++;
+            }
+        }
+        
+        if (collisionCount < minCollisions) {
+            minCollisions = collisionCount;
+            bestPath = detourPath;
+        }
+    }
+    
+    return bestPath;
+}
+
+function lineIntersectsNode(lineStart, lineEnd, nodePos, buffer) {
+    // Simple distance check from node to line segment
+    const A = nodePos[0] - lineStart[0];
+    const B = nodePos[1] - lineStart[1];
+    const C = lineEnd[0] - lineStart[0];
+    const D = lineEnd[1] - lineStart[1];
+    
+    const dot = A * C + B * D;
+    const lenSq = C * C + D * D;
+    let param = -1;
+    
+    if (lenSq !== 0) {
+        param = dot / lenSq;
+    }
+    
+    let xx, yy;
+    
+    if (param < 0) {
+        xx = lineStart[0];
+        yy = lineStart[1];
+    } else if (param > 1) {
+        xx = lineEnd[0];
+        yy = lineEnd[1];
+    } else {
+        xx = lineStart[0] + param * C;
+        yy = lineStart[1] + param * D;
+    }
+    
+    const dx = nodePos[0] - xx;
+    const dy = nodePos[1] - yy;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    
+    return distance < buffer;
+}
+
 function drawMap() {
     map.eachLayer(layer => {
         if (layer instanceof L.Path || layer instanceof L.Marker) {
@@ -121,7 +226,8 @@ function drawMap() {
         const reversePathKey = `${path.to}-${path.from}`;
 
         if (fromLoc && toLoc) {
-            const latlngs = [[fromLoc.lat, fromLoc.lng], [toLoc.lat, toLoc.lng]];
+            // Calculate smart path that avoids nodes and other edges
+            const latlngs = findAvoidancePath(fromLoc, toLoc, pathKey);
             const isToggledOff = toggledOffPathKeys.has(pathKey);
 
             // Determine edge color dynamically
