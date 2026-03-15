@@ -10,11 +10,20 @@
         
         .location-marker-icon { display: flex; justify-content: center; align-items: center; font-weight: bold; color: white; background-color: #A00; border-radius: 50%; border: 2px solid white; width: 28px; height: 28px; font-size: 12px; }
         .edge-weight-label { background: rgba(255, 255, 255, 0.8); border-radius: 4px; padding: 2px 5px; font-weight: bold; color: #000; text-align: center; }
+        .edge-tooltip { background: rgba(255, 255, 255, 0.95) !important; border: 1px solid #ddd !important; border-radius: 6px !important; font-weight: bold !important; font-size: 11px !important; box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important; }
     </style>
 </head>
 <body>
 
     <div id="map"></div>
+    <div id="controls">
+        <label>
+            <input type="checkbox" id="weightToggle" checked> Show Edge Weights
+        </label>
+        <div style="font-size: 11px; color: #666; margin-top: 5px;">
+            Make sure you zoom in if you don't see it
+        </div>
+    </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="visualizer.js"></script>

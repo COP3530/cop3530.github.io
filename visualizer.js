@@ -2,6 +2,7 @@ let map;
 let locations = {}; // { locationId: { lat, lng, name } }
 let paths = [];     // [ { from, to, time } ]
 let toggledOffPathKeys = new Set(); // Stores "from-to" strings of disabled paths
+let showWeights = true; // Toggle for weight visibility
 
 function initializeMap() {
     map = L.map('map').setView([29.64833, -82.34944], 15);
@@ -95,8 +96,8 @@ function drawMap() {
         const icon = L.divIcon({
             className: 'location-marker-icon',
             html: `<div>${id}</div>`, 
-            iconSize: [28, 28], 
-            iconAnchor: [14, 14]
+            iconSize: [20, 20], 
+            iconAnchor: [8, 8]
         });
         L.marker([loc.lat, loc.lng], { icon: icon }).addTo(map)
             .bindPopup(`<b>${loc.name}</b><br>ID: ${id}`);
@@ -120,7 +121,14 @@ function drawMap() {
 
             const style = {
                 color: edgeColor,
-                weight: 4,
+                weight: 3,
+                opacity: 0.6,
+                onMouseover: function() {
+                    this.setStyle({ weight: 4, opacity: 1 });
+                },
+                onMouseout: function() {
+                    this.setStyle({ weight: 2, opacity: 0.8 });
+                }
             };
 
             const polyline = L.polyline(latlngs, style).addTo(map);
@@ -137,12 +145,35 @@ function drawMap() {
                 drawMap(); // Redraw to reflect the change
             });
             
-            if (!isToggledOff) {
+            polyline.bindTooltip(`${path.from} → ${path.to}, ${path.time} Minutes`, {
+                permanent: false,
+                direction: 'top',
+                className: 'edge-tooltip',
+                offset: [0, -10],
+                sticky: true
+            });
+
+            const currentZoom = map.getZoom();
+            if (!isToggledOff && showWeights && currentZoom > 16) {
+                const midpoint = polyline.getCenter();
+                const offset = 0; // Small offset in degrees
+                const offsetLat = midpoint.lat + offset;
+                const offsetLng = midpoint.lng + offset;
+                
                 const weightIcon = L.divIcon({
                     className: 'edge-weight-label',
-                    html: `<span>${path.time}</span>`
+                    html: `<span style="background: rgba(255,255,255,0.9); padding: 3px 6px; border-radius: 6px; font-size: 11px; font-weight: bold; box-shadow: 0 1px 3px rgba(0,0,0,0.3);">${path.time}</span>`,
+                    iconSize: [18, 18],
+                    iconAnchor: [5, 5]
                 });
-                L.marker(polyline.getCenter(), { icon: weightIcon }).addTo(map);
+                L.marker([offsetLat, offsetLng], { icon: weightIcon })
+                    .bindTooltip(`${path.from} → ${path.to}, ${path.time} Minutes`, {
+                        permanent: false,
+                        direction: 'top',
+                        className: 'edge-tooltip',
+                        offset: [0, -10]
+                    })
+                    .addTo(map);
             }
         }
     });
@@ -151,4 +182,15 @@ function drawMap() {
 document.addEventListener('DOMContentLoaded', () => {
     initializeMap();
     loadMasterGraph();
+    
+    // Redraw map on zoom change to update label visibility
+    map.on('zoomend', () => {
+        drawMap();
+    });
+    
+    // Add event listener for weight toggle
+    document.getElementById('weightToggle').addEventListener('change', (e) => {
+        showWeights = e.target.checked;
+        drawMap();
+    });
 });
