@@ -215,6 +215,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (colorToggle) {
         colorToggle.addEventListener('click', () => {
             useMonotoneBlue = !useMonotoneBlue;
+            colorToggle.textContent = useMonotoneBlue ? 'Use Colored Edges' : 'Use Monotone Blue';
+            colorToggle.style.background = useMonotoneBlue ? '#e6f3ff' : '#f0f0f0';
             drawMap();
         });
     }
