@@ -4,6 +4,19 @@ let paths = [];     // [ { from, to, time } ]
 let toggledOffPathKeys = new Set(); // Stores "from-to" strings of disabled paths
 let showWeights = true; // Toggle for weight visibility
 
+// --- CONFIGURATION ---
+let useMonotoneBlue = false; // Toggle switch for monotone edges
+const strongColors = [
+    '#E6194B', // Bold Red
+    '#3CB44B', // Deep Green
+    '#F58231', // Vibrant Orange
+    '#911EB4', // Strong Purple
+    '#4363D8', // Bright Blue
+    '#800000', // Maroon
+    '#000075', // Navy
+    '#F032E6'  // Magenta
+];
+
 function initializeMap() {
     map = L.map('map').setView([29.64833, -82.34944], 15);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -13,12 +26,10 @@ function initializeMap() {
 
 /**
  * Parses raw CSV text into an array of objects.
- * @param {string} text The raw CSV string.
- * @returns {Array<Object>} An array of objects representing the rows.
  */
 function parseCSV(text) {
     const lines = text.trim().split('\n');
-    if (lines.length < 2) return []; // Return empty if no data rows
+    if (lines.length < 2) return []; 
 
     const header = lines[0].split(',').map(h => h.trim());
     const rows = lines.slice(1).map(line => {
@@ -34,13 +45,14 @@ function parseCSV(text) {
 
 async function loadMasterGraph() {
     try {
+        // Fetch only locations and edges. colors.csv is no longer needed.
         const [locationsResponse, pathsResponse] = await Promise.all([
             fetch('locations.csv'),
             fetch('edges.csv')
         ]);
 
-        if (!locationsResponse.ok) throw new Error(`Failed to load locations.csv: ${locationsResponse.statusText}`);
-        if (!pathsResponse.ok) throw new Error(`Failed to load edges.csv: ${pathsResponse.statusText}`);
+        if (!locationsResponse.ok) throw new Error(`Failed to load locations.csv`);
+        if (!pathsResponse.ok) throw new Error(`Failed to load edges.csv`);
 
         const locationsText = await locationsResponse.text();
         const pathsText = await pathsResponse.text();
@@ -68,7 +80,7 @@ async function loadMasterGraph() {
                 });
             }
         });
-        
+
         toggledOffPathKeys.clear();
 
         console.log("Master graph data loaded successfully from local files.");
@@ -76,12 +88,11 @@ async function loadMasterGraph() {
 
     } catch (error) {
         console.error("Failed to load master graph:", error);
-        alert(`Failed to load master graph files (locations.csv, paths.csv): ${error.message}\n\nPlease ensure the files exist in the same directory as the HTML file.`);
+        alert(`Failed to load master graph files: ${error.message}\n\nPlease ensure the files exist in the same directory as the HTML file.`);
     }
 }
 
 function drawMap() {
-    // Clear previous layers (everything except the base map tiles)
     map.eachLayer(layer => {
         if (layer instanceof L.Path || layer instanceof L.Marker) {
             map.removeLayer(layer);
@@ -90,20 +101,20 @@ function drawMap() {
 
     if (Object.keys(locations).length === 0) return;
 
-    // Draw Location Markers (Nodes)
+    // Draw Location Markers (Nodes) - Reduced size and removed ID text for decluttering
     for (const id in locations) {
         const loc = locations[id];
         const icon = L.divIcon({
             className: 'location-marker-icon',
-            html: `<div>${id}</div>`, 
+            html: `${id}`, 
             iconSize: [20, 20], 
-            iconAnchor: [8, 8]
+            iconAnchor: [6, 6]
         });
         L.marker([loc.lat, loc.lng], { icon: icon }).addTo(map)
             .bindPopup(`<b>${loc.name}</b><br>ID: ${id}`);
     }
 
-    paths.forEach(path => {
+    paths.forEach((path, index) => {
         const fromLoc = locations[path.from];
         const toLoc = locations[path.to];
         const pathKey = `${path.from}-${path.to}`;
@@ -111,29 +122,38 @@ function drawMap() {
 
         if (fromLoc && toLoc) {
             const latlngs = [[fromLoc.lat, fromLoc.lng], [toLoc.lat, toLoc.lng]];
-            
             const isToggledOff = toggledOffPathKeys.has(pathKey);
 
-            let edgeColor = '#0000FF'; // Default blue
+            // Determine edge color dynamically
+            let edgeColor;
             if (isToggledOff) {
                 edgeColor = '#FF0000'; // Red for disabled
+            } else if (useMonotoneBlue) {
+                edgeColor = '#0000FF'; // Standard Monotone Blue
+            } else {
+                edgeColor = strongColors[index % strongColors.length]; // Cycle through palette
             }
+
+            const baseWeight = 3; // Thinner lines
+            const baseOpacity = 0.8;
 
             const style = {
                 color: edgeColor,
-                weight: 3,
-                opacity: 0.6,
-                onMouseover: function() {
-                    this.setStyle({ weight: 4, opacity: 1 });
-                },
-                onMouseout: function() {
-                    this.setStyle({ weight: 2, opacity: 0.8 });
-                }
+                weight: baseWeight,
+                opacity: baseOpacity
             };
 
             const polyline = L.polyline(latlngs, style).addTo(map);
             
-            // Add click handler to toggle the edge's "disabled" state
+            // Correct Leaflet Implementation for Hover Animations
+            polyline.on('mouseover', function(e) {
+                e.target.setStyle({ weight: 7, opacity: 1 });
+            });
+            polyline.on('mouseout', function(e) {
+                e.target.setStyle({ weight: baseWeight, opacity: baseOpacity });
+            });
+            
+            // Toggle edges on click
             polyline.on('click', () => {
                 if (toggledOffPathKeys.has(pathKey)) {
                     toggledOffPathKeys.delete(pathKey);
@@ -142,9 +162,10 @@ function drawMap() {
                     toggledOffPathKeys.add(pathKey);
                     toggledOffPathKeys.add(reversePathKey);
                 }
-                drawMap(); // Redraw to reflect the change
+                drawMap(); 
             });
             
+            // Sticky Tooltip (follows the mouse along the line)
             polyline.bindTooltip(`${path.from} → ${path.to}, ${path.time} Minutes`, {
                 permanent: false,
                 direction: 'top',
@@ -153,27 +174,19 @@ function drawMap() {
                 sticky: true
             });
 
+            // Permanent weight badges (Only show when zoomed in far enough to avoid clutter)
             const currentZoom = map.getZoom();
             if (!isToggledOff && showWeights && currentZoom > 16) {
                 const midpoint = polyline.getCenter();
-                const offset = 0; // Small offset in degrees
-                const offsetLat = midpoint.lat + offset;
-                const offsetLng = midpoint.lng + offset;
                 
                 const weightIcon = L.divIcon({
                     className: 'edge-weight-label',
-                    html: `<span style="background: rgba(255,255,255,0.9); padding: 3px 6px; border-radius: 6px; font-size: 11px; font-weight: bold; box-shadow: 0 1px 3px rgba(0,0,0,0.3);">${path.time}</span>`,
+                    html: `<span style="background: rgba(255,255,255,0.9); padding: 3px 6px; border-radius: 6px; font-size: 11px; font-weight: bold; box-shadow: 0 1px 3px rgba(0,0,0,0.3); border: 2px solid ${edgeColor}; color: ${edgeColor};">${path.time}</span>`,
                     iconSize: [18, 18],
                     iconAnchor: [5, 5]
                 });
-                L.marker([offsetLat, offsetLng], { icon: weightIcon })
-                    .bindTooltip(`${path.from} → ${path.to}, ${path.time} Minutes`, {
-                        permanent: false,
-                        direction: 'top',
-                        className: 'edge-tooltip',
-                        offset: [0, -10]
-                    })
-                    .addTo(map);
+                
+                L.marker([midpoint.lat, midpoint.lng], { icon: weightIcon, interactive: false }).addTo(map);
             }
         }
     });
@@ -183,14 +196,26 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeMap();
     loadMasterGraph();
     
-    // Redraw map on zoom change to update label visibility
+    // Redraw on zoom so the permanent weight labels appear/disappear based on zoom level
     map.on('zoomend', () => {
         drawMap();
     });
     
-    // Add event listener for weight toggle
-    document.getElementById('weightToggle').addEventListener('change', (e) => {
-        showWeights = e.target.checked;
-        drawMap();
-    });
+    // Checkboxes for UI logic
+    const weightToggle = document.getElementById('weightToggle');
+    if (weightToggle) {
+        weightToggle.addEventListener('change', (e) => {
+            showWeights = e.target.checked;
+            drawMap();
+        });
+    }
+
+    // Toggle button for turning everything Monotone Blue
+    const colorToggle = document.getElementById('colorToggle');
+    if (colorToggle) {
+        colorToggle.addEventListener('click', () => {
+            useMonotoneBlue = !useMonotoneBlue;
+            drawMap();
+        });
+    }
 });
